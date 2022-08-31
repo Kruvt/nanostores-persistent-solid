@@ -5,13 +5,14 @@
   "keywords": [
     "nanostores",
     "persistent",
+    "solid",
     "store",
     "state",
-    "state manager",
-    "solid"
+    "state manager"
   ],
   "author": "Vance Tan <vancetan.dev>",
   "license": "MIT",
+  "homepage": "https://github.com/Kruvt/nanostores-persistent-solid",
   "publishConfig": {
     "directory": "package"
   },
