@@ -8,8 +8,6 @@ function testSupport() {
   try {
     return typeof localStorage !== 'undefined';
   } catch {
-    /* c8 ignore next 3 */
-    // In Privacy Mode access to localStorage will return error
     return false;
   }
 }
