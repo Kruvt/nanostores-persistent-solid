@@ -17,16 +17,19 @@
   "publishConfig": {
     "directory": "package"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs"
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
@@ -66,6 +69,7 @@
     "trailingComma": "none"
   },
   "clean-publish": {
+    "package-manager": "pnpm",
     "withoutPublish": true,
     "tempDir": "package",
     "files": [
@@ -74,6 +78,9 @@
       "tsup.config.ts",
       "vitest.config.ts",
       "vitest.setup.ts"
+    ],
+    "fields": [
+      "scripts"
     ]
   }
 }

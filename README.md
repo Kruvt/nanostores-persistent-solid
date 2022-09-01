@@ -3,7 +3,7 @@
 <img align="right" width="92" height="92" title="Nano Stores logo"
      src="https://nanostores.github.io/nanostores/logo.svg">
 
-Modified version of **[Nano Stores Solid]** — the Solid adapter for **[Nano Stores]** — that adds support for **[Nano Stores Persistent]** in Solid SSR environments.
+Modified version of **[Nano Stores Solid]** — the Solid adapter for **[Nano Stores]** — that adds/fixes support for **[Nano Stores Persistent]** in Solid SSR environments.
 
 The original version of Nano Stores Solid does not support Nano Stores Persistent in SSR environments due to an **[issue]** in which pre-rendered content does not re-render to show updated content from persistent storage engines. This is demonstrated in this **[minimal reproduction]**:
 
@@ -68,13 +68,21 @@ function Component() {
 }
 ```
 
-## Further Documentation
+## Documentation
 
-Code from the original libraries was modified in such a way that the API still remains fully intact and identical. Therefore, further documentation about the full API of this library can be found in the original repositories at **[Nano Stores]**, **[Nano Stores Persistent]** and **[Nano Stores Solid]**.
+Code from the original libraries were modified in such a way that:
+
+1. the API still remains fully intact (anything that you can export in the original libraries can also be exported in this library),
+2. it is identical in terms of surface area (usage of the APIs remains exactly the same), and
+3. its behaviour remains the same, except of course for the additional behaviour that has been added (persistent atoms/maps work in Solid SSR environments) which is the purpose of this library.
+
+Therefore, this also means that full documentation about the API of this library and how it can be used are readily found in the original repositories at **[Nano Stores Persistent]** and **[Nano Stores Solid]**.
 
 ## Tests
 
-The test suite was rewritten to ensure that the modified Solid integration is still able to handle the usecase of default atoms and maps which Nano Stores Solid could originally handle, and also the newly-added usecase of persistent atoms and maps. Do note that areas of the API from the original libraries which were not touched by the rewrites (specifically API concerning storage engines, encoders and test storage engines from Nano Stores Persistent) are not included in the tests.
+The test suite was rewritten to ensure that the modified Solid integration is still able to handle the usecase of default atoms and maps which Nano Stores Solid could originally handle, and also the newly-added usecase of persistent atoms and maps.
+
+Do note that areas of the API from the original libraries which were not touched by the rewrites (specifically API concerning storage engines, encoders and test storage engines from Nano Stores Persistent) are not included in the tests.
 
 ## License
 
