@@ -29,8 +29,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "release": "pnpm publish",
-    "prepublish": "rimraf ./package && pnpm run build && clean-publish"
+    "prepublishOnly": "rimraf ./package && pnpm run build && clean-publish",
+    "publish": "bumpp && pnpm publish"
   },
   "peerDependencies": {
     "nanostores": "^0.6.0",
@@ -40,11 +40,12 @@
     "nanostores": "^0.6.0"
   },
   "devDependencies": {
-    "solid-js": "^1.4.8",
-    "tsup": "^6.2.3",
-    "typescript": "^4.8.2",
+    "bumpp": "^8.2.1",
     "clean-publish": "^4.0.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "solid-js": "^1.5.3",
+    "tsup": "^6.2.3",
+    "typescript": "^4.8.2"
   },
   "prettier": {
     "arrowParens": "avoid",
@@ -56,6 +57,11 @@
   },
   "clean-publish": {
     "withoutPublish": true,
-    "tempDir": "package"
+    "tempDir": "package",
+    "files": [
+      ".gitignore",
+      "tsconfig.json",
+      "tsup.config.ts"
+    ]
   }
 }

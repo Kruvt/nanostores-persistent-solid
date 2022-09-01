@@ -54,7 +54,7 @@ export const testObj = persistentMap<SettingsValue>(
 import { useStore } from 'nanostores-persistent-solid';
 import { testAtom, testObj } from './store';
 
-function BearCounter() {
+function Component() {
   const $testAtom = useStore(testAtom);
   const $testObj = useStore(testObj);
 
