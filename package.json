@@ -1,6 +1,6 @@
 {
   "name": "nanostores-persistent-solid",
-  "version": "0.2.1",
+  "version": "0.1.0",
   "description": "Modified version of Nano Stores Solid that adds supports for Nano Stores Persistent in Solid SSR environments.",
   "keywords": [
     "nanostores",
