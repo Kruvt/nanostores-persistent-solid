@@ -7,7 +7,6 @@ specifiers:
   bumpp: ^8.2.1
   clean-publish: ^4.0.1
   jsdom: ^20.0.0
-  nanodelay: ^2.0.2
   nanostores: ^0.6.0
   rimraf: ^3.0.2
   solid-js: ^1.5.3
@@ -28,7 +27,6 @@ devDependencies:
   bumpp: 8.2.1
   clean-publish: 4.0.1
   jsdom: 20.0.0
-  nanodelay: 2.0.2
   rimraf: 3.0.2
   solid-js: 1.5.3
   solid-testing-library: 0.3.0_solid-js@1.5.3
@@ -1997,11 +1995,6 @@ packages:
       any-promise: 1.3.0
       object-assign: 4.1.1
       thenify-all: 1.6.0
-    dev: true
-
-  /nanodelay/2.0.2:
-    resolution: {integrity: sha512-6AS5aCSXsjoxq2Jr9CdaAeT60yoYDOTp6po9ziqeOeY6vf6uTEHYSqWql6EFILrM3fEfXgkZ4KqE9L0rTm/wlA==}
-    engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
     dev: true
 
   /nanoid/3.3.4:

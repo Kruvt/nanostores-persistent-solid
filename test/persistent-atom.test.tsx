@@ -63,39 +63,6 @@ it('Loads data from localStorage and renders it', async () => {
   expect(screen.getByTestId('div-1')).toHaveTextContent('savedValue');
 });
 
-it('Reverts back to initial data if keys manually cleaned in localStorage and renders it', async () => {
-  const testAtom = persistentAtom('test:key', 'initialValue');
-
-  localStorage.clear();
-
-  const Wrapper = () => {
-    const $testAtom = useStore(testAtom);
-    const mutate = action(testAtom, 'mutate', (store, value) =>
-      store.set(value)
-    );
-
-    return (
-      <>
-        <div data-testid="div-1">{$testAtom()}</div>
-        <button data-testid="button-1" onClick={() => mutate('newValue')}>
-          Mutate
-        </button>
-        <button data-testid="button-2" onClick={() => localStorage.clear()}>
-          Clear
-        </button>
-      </>
-    );
-  };
-
-  render(() => <Wrapper />);
-  screen.getByTestId('button-1').click();
-  expect(localStorage.getItem('test:key')).toEqual('newValue');
-  expect(screen.getByTestId('div-1')).toHaveTextContent('newValue');
-  screen.getByTestId('button-2').click();
-  expect(localStorage.getItem('test:key')).toEqual(null);
-  expect(screen.getByTestId('div-1')).toHaveTextContent('initialValue');
-});
-
 it('Updates data by listening to other tabs and renders it', async () => {
   const testAtom = persistentAtom('test:key', 'initialValue');
 
