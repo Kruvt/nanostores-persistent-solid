@@ -29,6 +29,8 @@
   ],
   "scripts": {
     "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "prepublishOnly": "rimraf ./package && pnpm run build && clean-publish",
     "publish": "bumpp && pnpm publish"
   },
@@ -40,12 +42,21 @@
     "nanostores": "^0.6.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@types/jsdom": "^20.0.0",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "bumpp": "^8.2.1",
     "clean-publish": "^4.0.1",
+    "jsdom": "^20.0.0",
+    "nanodelay": "^2.0.2",
     "rimraf": "^3.0.2",
     "solid-js": "^1.5.3",
+    "solid-testing-library": "^0.3.0",
     "tsup": "^6.2.3",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "vite": "^3.0.9",
+    "vite-plugin-solid": "^2.3.0",
+    "vitest": "^0.22.1"
   },
   "prettier": {
     "arrowParens": "avoid",
