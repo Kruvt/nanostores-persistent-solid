@@ -10,12 +10,12 @@ afterEach(() => {
 });
 
 it('Initializes data in localStorage and renders it if no existing data present in localStorage', async () => {
-  const atom = persistentAtom('test:key', 'initialValue');
+  const testAtom = persistentAtom('test:key', 'initialValue');
 
   const Wrapper = () => {
-    const $atom = useStore(atom);
+    const $testAtom = useStore(testAtom);
 
-    return <div data-testid="div-1">{$atom()}</div>;
+    return <div data-testid="div-1">{$testAtom()}</div>;
   };
 
   expect(localStorage.getItem('test:key')).toEqual(null);
@@ -25,15 +25,15 @@ it('Initializes data in localStorage and renders it if no existing data present 
 });
 
 it('Mutates data and then saves to localStorage and renders it', async () => {
-  const atom = persistentAtom('test:key', 'initialValue');
-  const mutate = action(atom, 'mutate', (store, value) => store.set(value));
+  const testAtom = persistentAtom('test:key', 'initialValue');
+  const mutate = action(testAtom, 'mutate', (store, value) => store.set(value));
 
   const Wrapper = () => {
-    const $atom = useStore(atom);
+    const $testAtom = useStore(testAtom);
 
     return (
       <>
-        <div data-testid="div-1">{$atom()}</div>
+        <div data-testid="div-1">{$testAtom()}</div>
         <button onClick={() => mutate('newValue')}>Mutate</button>
       </>
     );
@@ -48,14 +48,14 @@ it('Mutates data and then saves to localStorage and renders it', async () => {
 });
 
 it('Loads data from localStorage and renders it', async () => {
-  const atom = persistentAtom('test:key', 'initialValue');
+  const testAtom = persistentAtom('test:key', 'initialValue');
 
   localStorage.setItem('test:key', 'savedValue');
 
   const Wrapper = () => {
-    const $atom = useStore(atom);
+    const $testAtom = useStore(testAtom);
 
-    return <div data-testid="div-1">{$atom()}</div>;
+    return <div data-testid="div-1">{$testAtom()}</div>;
   };
 
   render(() => <Wrapper />);
@@ -64,17 +64,19 @@ it('Loads data from localStorage and renders it', async () => {
 });
 
 it('Reverts back to initial data if keys manually cleaned in localStorage and renders it', async () => {
-  const atom = persistentAtom('test:key', 'initialValue');
+  const testAtom = persistentAtom('test:key', 'initialValue');
 
   localStorage.clear();
 
   const Wrapper = () => {
-    const $atom = useStore(atom);
-    const mutate = action(atom, 'mutate', (store, value) => store.set(value));
+    const $testAtom = useStore(testAtom);
+    const mutate = action(testAtom, 'mutate', (store, value) =>
+      store.set(value)
+    );
 
     return (
       <>
-        <div data-testid="div-1">{$atom()}</div>
+        <div data-testid="div-1">{$testAtom()}</div>
         <button data-testid="button-1" onClick={() => mutate('newValue')}>
           Mutate
         </button>
@@ -95,14 +97,14 @@ it('Reverts back to initial data if keys manually cleaned in localStorage and re
 });
 
 it('Updates data by listening to other tabs and renders it', async () => {
-  const atom = persistentAtom('test:key', 'initialValue');
+  const testAtom = persistentAtom('test:key', 'initialValue');
 
   const Wrapper = () => {
-    const $atom = useStore(atom);
+    const $testAtom = useStore(testAtom);
 
     return (
       <>
-        <div data-testid="div-1">{$atom()}</div>
+        <div data-testid="div-1">{$testAtom()}</div>
         <button
           onClick={() => {
             window.dispatchEvent(
@@ -128,14 +130,16 @@ it('Updates data by listening to other tabs and renders it', async () => {
 });
 
 it('Should not update data by listening to other tabs if disabled and continues rendering existing data', async () => {
-  const atom = persistentAtom('test:key', 'initialValue', { listen: false });
+  const testAtom = persistentAtom('test:key', 'initialValue', {
+    listen: false
+  });
 
   const Wrapper = () => {
-    const $atom = useStore(atom);
+    const $testAtom = useStore(testAtom);
 
     return (
       <>
-        <div data-testid="div-1">{$atom()}</div>
+        <div data-testid="div-1">{$testAtom()}</div>
         <button
           onClick={() => {
             window.dispatchEvent(
