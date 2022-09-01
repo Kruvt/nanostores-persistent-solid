@@ -71,7 +71,9 @@
     "files": [
       ".gitignore",
       "tsconfig.json",
-      "tsup.config.ts"
+      "tsup.config.ts",
+      "vitest.config.ts",
+      "vitest.setup.ts"
     ]
   }
 }
