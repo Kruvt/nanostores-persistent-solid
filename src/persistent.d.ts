@@ -33,7 +33,7 @@ export function setPersistentEngine(
 /**
  * `window` events to be used in `setPersistentEngine`.
  */
-export const windowPersistentEvents: PersistentEvents;
+export let windowPersistentEvents: PersistentEvents;
 
 export interface PersistentEncoder<Origin = any> {
   /**
@@ -109,7 +109,7 @@ interface PersistentAtomFactory {
   ): PersistentWritableAtom<Value>;
 }
 
-export const persistentAtom: PersistentAtomFactory;
+export let persistentAtom: PersistentAtomFactory;
 
 interface PersistentMapFactory {
   /**
@@ -141,7 +141,7 @@ interface PersistentMapFactory {
   ): PersistentMapStore<Value>;
 }
 
-export const persistentMap: PersistentMapFactory;
+export let persistentMap: PersistentMapFactory;
 
 /**
  * Enable fake storage to test persistent stores.
