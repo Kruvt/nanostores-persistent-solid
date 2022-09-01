@@ -10,7 +10,7 @@ import { afterEach, expect, it } from 'vitest';
 import { delay } from 'nanodelay';
 
 import { Match, Show, Switch, createMemo, createSignal } from 'solid-js';
-import { useStore } from '../src/useStore';
+import { useStore } from '../src/use-store';
 
 afterEach(() => {
   cleanup();

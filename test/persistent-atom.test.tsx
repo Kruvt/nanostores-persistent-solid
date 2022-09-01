@@ -3,7 +3,7 @@ import { cleanup, render, screen } from 'solid-testing-library';
 import { delay } from 'nanodelay';
 import { action } from 'nanostores';
 import { persistentAtom } from '../src/persistent';
-import { useStore } from '../src/useStore';
+import { useStore } from '../src/use-store';
 
 afterEach(() => {
   cleanup();
