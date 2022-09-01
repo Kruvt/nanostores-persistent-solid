@@ -1,4 +1,4 @@
-export { useStore } from './useStore';
+export { useStore } from './use-store';
 export {
   windowPersistentEvents,
   setPersistentEngine,
