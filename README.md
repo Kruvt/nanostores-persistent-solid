@@ -12,7 +12,7 @@
 <img align="right" width="92" height="92" title="Nano Stores logo"
      src="https://nanostores.github.io/nanostores/logo.svg">
 
-Drop-in replacement of both **[Nano Stores Persistent]** and **[Nano Stores Solid]** that adds/fixes support for persistent atoms and maps in Solid SSR environments.
+Drop-in replacement for both **[Nano Stores Persistent]** and **[Nano Stores Solid]** that adds/fixes support for persistent atoms and maps in Solid SSR environments.
 
 The original version of Nano Stores Solid does not support Nano Stores Persistent in SSR environments due to an **[issue]** in which pre-rendered content does not re-render to show updated content from persistent storage engines. This is demonstrated in this **[minimal reproduction]**:
 

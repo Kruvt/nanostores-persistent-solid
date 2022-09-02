@@ -14,9 +14,14 @@
   "author": "Vance Tan <vancetan.dev>",
   "license": "MIT",
   "homepage": "https://github.com/Kruvt/nanostores-persistent-solid",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kruvt/nanostores-persistent-solid.git"
+  },
   "publishConfig": {
     "directory": "package"
   },
+  "main": "./dist/index.js",
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
