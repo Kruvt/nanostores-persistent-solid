@@ -21,6 +21,7 @@ This library modifies contents from both Nano Stores Solid and Nano Stores Persi
 [nano stores persistent]: https://github.com/nanostores/persistent
 [minimal reproduction]: https://stackblitz.com/edit/github-kbyuhy-tet5pj?file=src/components/Component.jsx
 [issue]: https://github.com/nanostores/solid/issues/11
+[output format conventions]: https://github.com/nanostores/nanostores#esm
 
 ## Quick Start
 
@@ -85,6 +86,10 @@ Therefore, this also means that full documentation about the API of this library
 The test suite was rewritten to ensure that the modified Solid integration is still able to handle the use-case of default atoms and maps which Nano Stores Solid could originally handle, and also the newly-added use-case of persistent atoms and maps.
 
 Do note that areas of the API from the original libraries which were not touched by the rewrites (specifically API concerning storage engines, encoders and test storage engines from Nano Stores Persistent) are not included in the tests.
+
+## Bundle Output Format
+
+This library is an **ESM-only package**, so as to adhere to the **[output format conventions]** set by Nano Stores libraries. This means that you will need to use ES modules in your application in order to import this library.
 
 ## License
 

@@ -17,12 +17,11 @@
   "publishConfig": {
     "directory": "package"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs"
+    ".": "./index.js",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
