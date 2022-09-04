@@ -1,6 +1,6 @@
 import { afterEach, expect, it } from 'vitest';
 import { cleanup, render, screen } from 'solid-testing-library';
-import { action } from 'nanostores';
+import { action, computed } from 'nanostores';
 import { persistentMap } from '../src/persistent';
 import { useStore } from '../src/use-store';
 
@@ -236,4 +236,43 @@ it('Should not update data by listening to other tabs if disabled and continues 
   expect(localStorage.getItem('test:keyTwo')).toEqual('initialValueTwo');
   expect(screen.getByTestId('div-1')).toHaveTextContent('initialValueOne');
   expect(screen.getByTestId('div-2')).toHaveTextContent('initialValueTwo');
+});
+
+it('Initializes computed data from persistent map and renders it', async () => {
+  const testMap = persistentMap('test:', {
+    keyOne: 'initialValueOne',
+    keyTwo: 'initialValueTwo'
+  });
+  const computedMap = computed(testMap, originalValue => {
+    let newObj: { [key: string]: string } = {};
+    for (const [key, value] of Object.entries(originalValue)) {
+      newObj[key] = 'computed ' + value;
+    }
+    return newObj;
+  });
+
+  localStorage.setItem('test:keyOne', 'savedValueOne');
+  localStorage.setItem('test:keyTwo', 'savedValueTwo');
+
+  const Wrapper = () => {
+    useStore(testMap);
+    const $computedMap = useStore(computedMap);
+
+    return (
+      <>
+        <div data-testid="div-1">{$computedMap().keyOne}</div>
+        <div data-testid="div-2">{$computedMap().keyTwo}</div>
+      </>
+    );
+  };
+
+  render(() => <Wrapper />);
+  expect(localStorage.getItem('test:keyOne')).toEqual('savedValueOne');
+  expect(localStorage.getItem('test:keyTwo')).toEqual('savedValueTwo');
+  expect(screen.getByTestId('div-1')).toHaveTextContent(
+    'computed savedValueOne'
+  );
+  expect(screen.getByTestId('div-2')).toHaveTextContent(
+    'computed savedValueTwo'
+  );
 });

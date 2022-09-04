@@ -17,13 +17,9 @@ function createPrimitiveStore<
     if ('persistentKey' in store) {
       let key = store.persistentKey;
       if (storageEngine[key]) {
-        setState(store.decode(storageEngine[key]));
+        store.set(store.decode(storageEngine[key]));
       } else {
-        if (typeof initialValue === 'undefined') {
-          delete storageEngine[key];
-        } else {
-          storageEngine[key] = store.encode(initialValue);
-        }
+        store.set(initialValue);
       }
     }
   });
@@ -56,13 +52,9 @@ export function useStore<
     if ('persistentKey' in store) {
       let key = store.persistentKey;
       if (storageEngine[key]) {
-        setState(store.decode(storageEngine[key]));
+        store.set(store.decode(storageEngine[key]));
       } else {
-        if (typeof initialValue === 'undefined') {
-          delete storageEngine[key];
-        } else {
-          storageEngine[key] = store.encode(initialValue);
-        }
+        store.set(initialValue);
       }
     }
     if ('persistentPrefix' in store) {
@@ -75,17 +67,10 @@ export function useStore<
       }
       for (let rootKey in initialValue) {
         if (!(rootKey in data)) {
-          if (typeof initialValue[rootKey] === 'undefined') {
-            delete storageEngine[prefix + rootKey];
-          } else {
-            storageEngine[prefix + rootKey] = store.encode(
-              initialValue[rootKey]
-            );
-            data[rootKey] = initialValue[rootKey];
-          }
+          data[rootKey] = initialValue[rootKey];
         }
       }
-      setState(data);
+      store.set(data);
     }
   });
 

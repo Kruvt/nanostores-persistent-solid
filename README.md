@@ -1,5 +1,6 @@
 [nano stores solid]: https://github.com/nanostores/solid
 [nano stores persistent]: https://github.com/nanostores/persistent
+[nano stores]: https://github.com/nanostores/nanostores
 [minimal reproduction]: https://stackblitz.com/edit/github-kbyuhy-tet5pj?file=src/components/Component.jsx
 [issue]: https://github.com/nanostores/solid/issues/11
 [output format conventions]: https://github.com/nanostores/nanostores#esm
@@ -71,14 +72,33 @@ function Component() {
 }
 ```
 
+## Usage of Computed Atoms/Maps
+
+The use of `computed` from **[Nano Stores]** differs from regular usage in one small aspect — the parent atoms/maps for which the computed atom is based off have to be passed into `useStore` at least once within the application. Therefore, it is recommended to simply pass any parent atoms/maps into `useStore` right before passing the computed atom into `useStore` wherever the computed atoms are used in the application:
+
+```tsx
+// Component.tsx
+import { useStore } from 'nanostores-persistent-solid';
+import { parentAtom, computedAtom } from './store';
+
+function Component() {
+  useStore(parentAtom); // assigning variable to return value is not required if not used
+  const computedAtom = useStore(computedAtom);
+
+  return <div>{computedAtom()}</div>;
+}
+```
+
 ## Documentation
 
 Code from the original libraries were modified in such a way that:
 
 1. the API still remains fully intact (anything that you can export in the original libraries can also be exported in this library),
-2. it is identical in terms of surface area (usage of the APIs remains exactly the same),
-3. its behaviour remains the same, except of course for the additional behaviour that has been added (persistent atoms/maps work in Solid SSR environments) which is the purpose of this library, and
-4. The feature parity as described above will be maintained as the original packages receive further updates. Currently, it has feature parity with **v0.6.2** of Nano Stores Persistent and **v0.2.0** of Nano Stores Solid.
+2. it is identical in terms of surface area (usage of the APIs in terms of arguments and return values remains exactly the same),
+3. its behaviour remains the same, except for:
+   - computed atoms/maps which behave slightly differently and therefore requires the varied usage [as described above](#usage-of-computed-atomsmaps),
+   - and of course the additional behaviour that has been added (persistent atoms/maps work in Solid SSR environments) which is the purpose of this library.
+4. The feature parity as mentioned above will be maintained as the original packages receive further updates. Currently, it has feature parity with **v0.6.2** of Nano Stores Persistent and **v0.2.0** of Nano Stores Solid.
 
 Therefore, this also means that full documentation about the API of this library and how it can be used are readily found in the original repositories at **[Nano Stores Persistent]** and **[Nano Stores Solid]**.
 
