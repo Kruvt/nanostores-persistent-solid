@@ -1,6 +1,6 @@
 import { afterEach, expect, it } from 'vitest';
 import { cleanup, render, screen } from 'solid-testing-library';
-import { atom, action } from 'nanostores';
+import { atom, action, computed } from 'nanostores';
 import { useStore } from '../src/use-store';
 
 afterEach(() => {
@@ -39,4 +39,23 @@ it('Mutates data and then renders it', async () => {
   expect(screen.getByTestId('div-1')).toHaveTextContent('initialValue');
   screen.getByRole('button').click();
   expect(screen.getByTestId('div-1')).toHaveTextContent('newValue');
+});
+
+it('Initializes computed data and renders it', async () => {
+  const testAtom = atom('initialValue');
+  const computedAtom = computed(
+    testAtom,
+    originalValue => 'computed ' + originalValue
+  );
+
+  const Wrapper = () => {
+    const $computedAtom = useStore(computedAtom);
+
+    return <div data-testid="div-1">{$computedAtom()}</div>;
+  };
+
+  render(() => <Wrapper />);
+  expect(screen.getByTestId('div-1')).toHaveTextContent(
+    'computed initialValue'
+  );
 });

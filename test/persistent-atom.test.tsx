@@ -1,6 +1,6 @@
 import { afterEach, expect, it } from 'vitest';
 import { cleanup, render, screen } from 'solid-testing-library';
-import { action } from 'nanostores';
+import { action, computed } from 'nanostores';
 import { persistentAtom } from '../src/persistent';
 import { useStore } from '../src/use-store';
 
@@ -129,4 +129,24 @@ it('Should not update data by listening to other tabs if disabled and continues 
   screen.getByRole('button').click();
   expect(localStorage.getItem('test:key')).toEqual('initialValue');
   expect(screen.getByTestId('div-1')).toHaveTextContent('initialValue');
+});
+
+it('Initializes computed data from persistent atom and renders it', async () => {
+  const testAtom = persistentAtom('test:key', 'initialValue');
+  const computedAtom = computed(testAtom, originalValue => {
+    return 'computed ' + originalValue;
+  });
+
+  localStorage.setItem('test:key', 'savedValue');
+
+  const Wrapper = () => {
+    useStore(testAtom);
+    const $computedAtom = useStore(computedAtom);
+
+    return <div data-testid="div-1">{$computedAtom()}</div>;
+  };
+
+  render(() => <Wrapper />);
+  expect(localStorage.getItem('test:key')).toEqual('savedValue');
+  expect(screen.getByTestId('div-1')).toHaveTextContent('computed savedValue');
 });

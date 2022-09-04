@@ -60,14 +60,12 @@ export type PersistentOptions =
 export interface PersistentWritableAtom<Value = any>
   extends WritableAtom<Value> {
   persistentKey: string;
-  encode: (value: Value) => string;
   decode: (encoded: string) => Value;
 }
 
 export interface PersistentMapStore<Value extends object>
   extends MapStore<Value> {
   persistentPrefix: string;
-  encode: (value: Value) => string;
   decode: (encoded: string) => Value;
 }
 
